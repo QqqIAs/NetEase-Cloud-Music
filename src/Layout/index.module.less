@@ -1,0 +1,20 @@
+
+
+.middle {
+  width: 100%;
+  height: calc(100% - @headerHeight - @footerHeight);
+  display: flex;
+  overflow: hidden;
+  background-color: #FFFFFF;
+}
+
+.content {
+  /* 减去sidebar的宽度 */
+  width: calc(100% - @sidebarWidth);
+
+  /* 减去header和footer的高度 */
+  height: calc(100% - @headerHeight - @footerHeight);
+  margin-top: @headerHeight;
+  margin-bottom: @footerHeight;
+  overflow: scroll;
+}

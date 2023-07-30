@@ -1,0 +1,32 @@
+.root {
+  display: flex;
+  align-items: center;
+  height: @headerHeight;
+  background-color: #F7F7F7;
+}
+
+.item {
+  display: inline-block;
+  margin-right: 2em;
+  cursor: pointer;
+  color: grey;
+
+  &:hover {
+    color: black;
+  }
+}
+
+.active {
+  color: black;
+}
+
+.round {
+  position: relative;
+  top: -10px;
+  display: inline-block;
+  margin: 0 2px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+}
+
