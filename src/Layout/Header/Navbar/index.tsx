@@ -1,9 +1,9 @@
-// import { useLocation, } from 'react-router-dom'
-// import cn from 'classnames'
 import { useLocation, useNavigate } from "react-router-dom";
 import ROUTES from '@/constants/routes'
 import styles from './index.module.less'
-import { LeftOutlined, RightOutlined } from '@ant-design/icons'
+import { LeftOutlined, RightOutlined, CloseOutlined, ArrowsAltOutlined, MinusOutlined} from '@ant-design/icons'
+import { useState } from "react";
+import Search from "../Search";
 
 const NAVBAR = {
   [ROUTES.DISCOVERY]: [
@@ -44,8 +44,25 @@ const NAVBAR = {
   ],
 }
 
+const leftRound = [
+  {
+    color: '#ec6a5e',
+    ele: <CloseOutlined style={{fontSize: '9px'}}/>
+  },
+  {
+    color: '#f5c04f',
+    ele: <MinusOutlined style={{fontSize: '9px'}}/>
+  },
+  {
+    color: '#62c755',
+    ele: <ArrowsAltOutlined style={{fontSize: '9px'}}/>
+  }
+]
+
 
 const Navbar = () => {
+  const [activeIndex, setActiveIndex] = useState(0)
+
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
@@ -59,7 +76,8 @@ const Navbar = () => {
 
   // const hasMatchRoute = items.find(({ route }) => route === pathname)
 
-  const handleItemClick = (route: string) => {
+  const handleItemClick = (route: string, index: number) => {
+    setActiveIndex(index)
     navigate(route)
   }
 
@@ -68,19 +86,22 @@ const Navbar = () => {
       <div style={{ marginRight: '90px'}}>
         {/* 左侧最小化三个按钮 */}
           {
-            ['red', 'orange', 'green'].map((color) => {
-              return <span className={styles.round} style={{ backgroundColor: color }} key={color}></span>
+            leftRound.map(({color, ele}) => {
+              return <span className={styles.round} style={{ backgroundColor: color, cursor: 'pointer' }} key={color}><span className={styles.content}>
+                {ele}</span>
+                </span>
             })
           }        
       </div>
       <div style={{ marginRight: '30px'}}>
         {/* 左侧前进返回按钮 */}
-         <span><LeftOutlined /><RightOutlined /></span>
+         <span><LeftOutlined style={{ marginRight: '10px', fontSize: '14px'}} onClick={() => {navigate(-1)}}/><RightOutlined style={{ fontSize: '14px'}} onClick={() => {navigate(1)}}/></span>
       </div>
-      {items.map(({ label, route }) => {
+      {items.map(({ label, route }, index) => {
         return (
           <li
-            onClick={() => handleItemClick(route)}
+            style={activeIndex === index ? { color: '#000000'} : undefined}
+            onClick={() => handleItemClick(route, index)}
             className={styles.item}
             key={label}
           >
@@ -88,6 +109,7 @@ const Navbar = () => {
           </li>
         )
       })}
+      <Search></Search>
     </div>
   )
 }

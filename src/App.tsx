@@ -3,9 +3,9 @@ import {
 } from "react-router-dom";
 
 import router from './router/router.js'
+import 'normalize.css'
 
 function App() {
-  //const [count, setCount] = useState(0)
 
   return (
     <RouterProvider router={router} />

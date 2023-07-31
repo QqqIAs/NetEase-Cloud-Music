@@ -1,6 +1,7 @@
 import { Layout } from 'antd'
 const { Sider, Footer, Content } = Layout;
 import Navbar from './Header/Navbar';
+import LeftSider from './Sider';
 import styles from './index.module.less';
 import { Outlet } from 'react-router-dom';
 import { useLocation, useNavigate } from "react-router-dom";
@@ -17,14 +18,12 @@ function MainLayout() {
   
   return (
   <>
-  <Layout style={{ height: '100vh', overflow: 'hidden' }}>
     <Navbar></Navbar>
     <Layout hasSider className={styles['middle']}>
-      <Sider style={{ backgroundColor: '#E6E6E6'}}>Sider</Sider>
+      <Sider width={180} className={styles['sider']}><LeftSider></LeftSider></Sider>
       <Content className={styles['content']}><Outlet></Outlet></Content>
     </Layout>
     <Footer>Footer</Footer>
-  </Layout>
   </>
   )  
 }

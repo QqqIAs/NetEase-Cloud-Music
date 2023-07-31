@@ -2,14 +2,15 @@
   display: flex;
   align-items: center;
   height: @headerHeight;
-  background-color: #F7F7F7;
+  background-color: #F6F6F6;
 }
 
 .item {
-  display: inline-block;
+  display: flex;
   margin-right: 2em;
   cursor: pointer;
   color: grey;
+  font-size: 14px;
 
   &:hover {
     color: black;
@@ -28,5 +29,22 @@
   width: 13px;
   height: 13px;
   border-radius: 50%;
+
+  &:hover {
+    .content {
+      display: block;
+    }
+  }
 }
 
+.content{
+  display: none;
+  position: relative;
+  top: -4px;
+  right: -2px;
+}
+
+.search {
+  position: relative;
+  right: 30px;
+}
