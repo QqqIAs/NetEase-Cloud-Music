@@ -1,7 +1,5 @@
-
-
 function LatestMusic() {
-  return <div>LatestMusic</div>
+  return <div>最新音乐</div>
 }
 
 export default LatestMusic

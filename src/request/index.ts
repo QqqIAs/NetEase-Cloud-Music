@@ -1,6 +1,7 @@
-import axios from 'axios';
+import axios, {AxiosInstance, AxiosError, AxiosResponse }from 'axios'
 
-const instance = axios.create({
+
+const instance: AxiosInstance = axios.create({
     withCredentials: true,
     timeout: 60 * 1000,
     baseURL: '/api',
@@ -8,10 +9,10 @@ const instance = axios.create({
 
 
 instance.interceptors.response.use(
-    (response) => {
+    (response: AxiosResponse) => {
         return response.data;
     },
-    (error) => {
+    (error: AxiosError) => {
         return Promise.reject(error);
     },
 );

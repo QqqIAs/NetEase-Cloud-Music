@@ -1,14 +1,18 @@
 
 
 .middle {
+  position: fixed;
   width: 100%;
-  height: calc(100vh - @headerHeight - @footerHeight);
+  height: calc(100vh - @headerHeight);
   display: flex;
-  overflow: hidden;
   background-color: #FFFFFF;
+  overflow: hidden;
 }
 
 .sider {
+  position: absolute;
+  margin-top: @headerHeight;
+  
   :global {
     
     .ant-layout-sider-children{
@@ -22,8 +26,15 @@
 .content {
   /* 减去sidebar的宽度 */
   width: calc(100vw - @sidebarWidth) !important;
+  height: calc(100vh - @headerHeight - @footerHeight - 10px);
 
   margin-top: @headerHeight;
-  margin-bottom: @footerHeight;
   overflow: scroll;
+}
+
+.footer {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  z-index: 10;
 }
