@@ -14,6 +14,8 @@ export interface Result {
   trackNumberUpdateTime?: any;
   song: Song;
   alg: string;
+  artistName: string
+  
 }
 
 interface Song {

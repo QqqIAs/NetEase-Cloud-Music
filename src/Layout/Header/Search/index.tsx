@@ -18,7 +18,7 @@ function Search() {
       <div className={styles.search}>
       {
         select.map((item) => {
-          return <span onClick={() => {window.open(item.route)}} style={{marginRight: '20px', cursor: 'pointer'}}>{item.icon}</span>
+          return <span key={item.route} onClick={() => {window.open(item.route)}} style={{marginRight: '20px', cursor: 'pointer'}}>{item.icon}</span>
         })
       }
       </div>

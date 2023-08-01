@@ -1,0 +1,65 @@
+.song {
+  color: #1e1e1e;
+  font-size: 14px;
+  margin: 3px 0;
+
+}
+
+.artist {
+  color: #bababa;
+  font-size: 12px;
+  margin: 5px 0;
+
+}
+
+.img{
+  width: 230px;
+  height: 125px;
+  border-radius: 5px;
+}
+
+.playCount {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  transition: opacity 0.5s ease;
+  opacity: 1;
+} 
+
+.text {
+  width: 100%;
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  color: #fff;
+  font-size: 0.9em;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.5s ease;
+  opacity: 0;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+
+  .card {
+    position: relative;
+
+    &:hover {
+
+      cursor: pointer;
+
+      .text {
+        opacity: 1;
+      }
+
+      .playCount {
+        opacity: 0;
+      }
+    }
+  }
+}
+

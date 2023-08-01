@@ -4,7 +4,7 @@ import {
 } from "react-router-dom";
 
 import Layout from "../Layout/index";
-import LatestMusic from "@/pages/discovery/Latestmusic";
+import LatestMusic from "@/pages/discovery/LatestMusic";
 import Recommendation from "@/pages/discovery/Recommendation";
 import LeaderBoard from "@/pages/discovery/Leaderboard";
 import RecommendDaily from "@/pages/discovery/Recommend_daily";
