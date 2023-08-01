@@ -7,13 +7,13 @@ import getMusicUrl from '@/utils/getMusicUrl';
 
 function MusicItem(props: any) {
   const { name, picUrl, artists, index, id, duration } = props
+  const state = useAudioStore()
   const { setInitialState, setPlay } = useAudioStore((state) => state)
 
   const hasBorderBottom = [4, 9].indexOf(index) > -1
 
   const handlerPLay = () => {
     setInitialState(props)
-    setPlay(true)
   }
 
   return (

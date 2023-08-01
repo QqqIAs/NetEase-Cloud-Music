@@ -1,35 +1,48 @@
 import useAudioStore from "@/store/useAudioStore"
-import styles from './index.module.less'
 import { useEffect, useRef } from "react"
+import AudioItem from "./AudioItem"
+import styles from './index.module.less'
 
 function PlayAudio () {
-  const { picUrl, songName, artists, musicUrl, play, duration, show } = useAudioStore((state) => state)
+  const { picUrl, songName, artists, musicUrl, play, duration, show, setPlay } = useAudioStore((state) => state)
   const ref = useRef<HTMLAudioElement>(null)
 
   useEffect(() => {
     if(play) ref.current?.play()
-  }, [play])
+    else ref.current?.pause()
+    // 本地存储
+    // 判断musicUrl是否勋在是为了防止zustand存储初始化值被存放到本地
+    if(musicUrl && musicUrl !== localState?.musicUrl) {
+      localStorage.setItem('musicInitialState', JSON.stringify({
+        musicUrl,
+        artists,
+        picUrl,
+        songName,
+        duration,
+      }))
+    }
+  }, [play, musicUrl])
+
+  const localState = JSON.parse(localStorage.getItem('musicInitialState')!)
+
+  const localJSX = <>
+    <div className={styles.root}>
+      <AudioItem picUrl={localState?.picUrl} songName={localState?.songName} artists={localState?.artists} duration={localState?.duration}></AudioItem>
+    </div>
+  </>
 
   return (
-    <>
+    <div style={{display: 'flex'}}>
+      <audio ref={ref} style={{ display: 'none' }} controls src={musicUrl || localState.musicUrl}></audio>
       {show ? 
-        <>
-        <audio ref={ref} style={{ display: 'none' }} controls src={musicUrl}></audio>
-          <div className={styles.root}>
-            <img className={styles.img} src={picUrl} alt="" />
-            <div className={styles.text}>
-            <div className={styles.top}>
-              <span className={styles.name}>{songName}</span>
-              <span className={styles.artists}>{` - ${artists}`}</span>
-            </div>
-            <div className={styles.duration} >{duration}</div>
-            </div>
-            <div style={{ marginLeft: '20px'}} onClick={() => ref.current?.pause()} >暂停</div>
-            <div style={{ marginLeft: '20px'}} onClick={() => ref.current?.play()}>开始</div>
+        <> <div className={styles.root}>
+            <AudioItem picUrl={picUrl} songName={songName} artists={artists} duration={duration}></AudioItem>
           </div>
-        </> : null
+        </> : localState ? localJSX : null
       }
-    </>
+      <div style={{ marginLeft: '20px', marginTop: '10px'}} onClick={() => { setPlay(false)}} >暂停</div>
+      <div style={{ marginLeft: '20px', marginTop: '10px'}} onClick={() => { setPlay(true) }}>开始</div>
+    </div>
   )
 }
 

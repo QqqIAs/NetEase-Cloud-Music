@@ -17,10 +17,10 @@ type Store = {
 }
 
 const useAudioStore = create<Store>((set) => ({
-  picUrl: 'picUrl',
-  songName: 'songName',
-  artists: 'artists',
-  musicUrl: 'musicUrl',
+  picUrl: '',
+  songName: '',
+  artists: '',
+  musicUrl: '',
   duration: '0',
   // 是否展示
   show: false,

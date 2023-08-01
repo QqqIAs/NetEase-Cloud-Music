@@ -16,8 +16,6 @@ function LatestMusic() {
     getLatestMusic()
   }, [])
 
-  console.log('音乐', music?.result)
-
 
   return (<>
       <div style={{ marginTop: '50px'}}>
