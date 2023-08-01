@@ -15,8 +15,6 @@ function RecommendMv () {
     getList()
   }, [])
 
-  console.log('xx', lists)
-
   return (
     <>
     <div style={{ marginTop: '50px', marginBottom: '10px', fontSize: '16px', color: '#182026'}}>推荐MV<span><RightOutlined style={{ fontSize: '14px'}}/></span></div>

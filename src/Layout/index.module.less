@@ -26,15 +26,8 @@
 .content {
   /* 减去sidebar的宽度 */
   width: calc(100vw - @sidebarWidth) !important;
-  height: calc(100vh - @headerHeight - @footerHeight - 10px);
+  height: calc(100vh - @headerHeight - @footerHeight);
 
   margin-top: @headerHeight;
   overflow: scroll;
-}
-
-.footer {
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-  z-index: 10;
 }

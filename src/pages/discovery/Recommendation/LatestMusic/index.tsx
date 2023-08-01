@@ -16,6 +16,8 @@ function LatestMusic() {
     getLatestMusic()
   }, [])
 
+  console.log('音乐', music?.result)
+
 
   return (<>
       <div style={{ marginTop: '50px'}}>
@@ -24,14 +26,14 @@ function LatestMusic() {
         <div className={styles.block}>
           {
           loading &&  music?.result.slice(0,5).map((item, index) => {
-            return <MusicItem key={item.name} index = {index} name={item.name} picUrl={item.picUrl} artists={item.song.artists}></MusicItem>
+            return <MusicItem duration = {item.song.duration} key={item.name} id={item.id} index = {index} name={item.name} picUrl={item.picUrl} artists={item.song.artists}></MusicItem>
           })
         }
         </div>
         <div className={styles.block}>
           {
           loading &&  music?.result.slice(5).map((item, index) => {
-            return <MusicItem key={item.name} index = {index + 5} name={item.name} picUrl={item.picUrl} artists={item.song.artists}></MusicItem>
+            return <MusicItem duration = {item.song.duration} key={item.name}  id={item.id} index = {index + 5} name={item.name} picUrl={item.picUrl} artists={item.song.artists}></MusicItem>
           })
         }
         </div>
