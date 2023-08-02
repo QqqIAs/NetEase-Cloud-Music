@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import getArtistsName from '@/utils/getArtistsName'
 import getDurationTime from '@/utils/getDurationTime'
 import getMusicUrl from '@/utils/getMusicUrl'
+import formatTime from '@/utils/formatTime'
 
 type Store = {
   picUrl: string
@@ -26,9 +27,10 @@ const useAudioStore = create<Store>((set) => ({
   show: false,
   // 播放控制
   play: false,
+  // 播放时间
   setPlay: (play: boolean) => set(() => ({ play })),
   setShow: (show: boolean) => set(() => ({ show })),
-  setInitialState: (props: any) => set(() => ({
+  setInitialState: (props: any ) => set(() => ({
     play: true,
     show: true,
     picUrl: props.picUrl,

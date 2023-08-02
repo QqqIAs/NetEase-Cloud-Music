@@ -1,5 +1,5 @@
 import useAudioStore from "@/store/useAudioStore"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import AudioItem from "./LeftAudioItem"
 import MiddleAudioItem from "./MiddleAudioItem"
 import styles from './index.module.less'
@@ -9,6 +9,7 @@ import { Slider } from 'antd';
 function PlayAudio () {
   const { picUrl, songName, artists, musicUrl, play, duration, show, setPlay } = useAudioStore((state) => state)
   const ref = useRef<HTMLAudioElement>(null)
+  const [currentTime, setCurrentTime] = useState(0)
 
   const iconUrl = getAssetURL('sound.png')
 
@@ -32,7 +33,7 @@ function PlayAudio () {
 
   const localJSX = <>
     <div className={styles.audio}>
-      <AudioItem picUrl={localState?.picUrl} songName={localState?.songName} artists={localState?.artists} duration={localState?.duration}></AudioItem>
+      <AudioItem picUrl={localState?.picUrl} songName={localState?.songName} artists={localState?.artists} duration={localState?.duration} currentTime={currentTime} ></AudioItem>
     </div>
   </>
 
@@ -40,12 +41,19 @@ function PlayAudio () {
     ref.current!.volume = v/100
   }
 
+  // 播放时间改变
+  if(ref.current) {
+    ref.current.ontimeupdate = () => {
+      setCurrentTime(ref.current!.currentTime)
+    }
+  }
+
   return (
     <div className={styles.root}>
       <audio ref={ref} style={{ display: 'none' }} controls src={musicUrl || localState.musicUrl}></audio>
       {show ? 
         <> <div className={styles.audio}>
-            <AudioItem picUrl={picUrl} songName={songName} artists={artists} duration={duration}></AudioItem>
+            <AudioItem picUrl={picUrl} songName={songName} artists={artists} duration={duration} currentTime={currentTime}></AudioItem>
           </div>
         </> : localState ? localJSX : null
       }
