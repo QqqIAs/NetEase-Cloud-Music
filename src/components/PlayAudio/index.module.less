@@ -41,15 +41,26 @@
   :global {
     .ant-slider {
       height: 2px;
+
+      &:hover {
+        .ant-slider-track {
+          background-color: #b64037;
+          height: 2px;
+        }
+
+        .ant-slider-handle::after {
+          box-shadow: 0 0 0 2px #b64037
+        }
+      }
     }
 
     .ant-slider-track {
-      background-color: #fafafa;
+      background-color: #b64037;
       height: 2px;
     }
 
     .ant-slider-step {
-      background-color: #b64037;
+      // background-color: #b64037;
       height: 2px;
     }
 
