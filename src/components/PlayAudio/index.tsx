@@ -1,11 +1,16 @@
 import useAudioStore from "@/store/useAudioStore"
 import { useEffect, useRef } from "react"
-import AudioItem from "./AudioItem"
+import AudioItem from "./LeftAudioItem"
+import MiddleAudioItem from "./MiddleAudioItem"
 import styles from './index.module.less'
+import getAssetURL from "@/utils/getAssetURl"
+import { Slider } from 'antd';
 
 function PlayAudio () {
   const { picUrl, songName, artists, musicUrl, play, duration, show, setPlay } = useAudioStore((state) => state)
   const ref = useRef<HTMLAudioElement>(null)
+
+  const iconUrl = getAssetURL('sound.png')
 
   useEffect(() => {
     if(play) ref.current?.play()
@@ -26,22 +31,33 @@ function PlayAudio () {
   const localState = JSON.parse(localStorage.getItem('musicInitialState')!)
 
   const localJSX = <>
-    <div className={styles.root}>
+    <div className={styles.audio}>
       <AudioItem picUrl={localState?.picUrl} songName={localState?.songName} artists={localState?.artists} duration={localState?.duration}></AudioItem>
     </div>
   </>
 
+  const setVolume = (v) => {
+    ref.current!.volume = v/100
+  }
+
   return (
-    <div style={{display: 'flex'}}>
+    <div className={styles.root}>
       <audio ref={ref} style={{ display: 'none' }} controls src={musicUrl || localState.musicUrl}></audio>
       {show ? 
-        <> <div className={styles.root}>
+        <> <div className={styles.audio}>
             <AudioItem picUrl={picUrl} songName={songName} artists={artists} duration={duration}></AudioItem>
           </div>
         </> : localState ? localJSX : null
       }
-      <div style={{ marginLeft: '20px', marginTop: '10px'}} onClick={() => { setPlay(false)}} >暂停</div>
-      <div style={{ marginLeft: '20px', marginTop: '10px'}} onClick={() => { setPlay(true) }}>开始</div>
+      <div className={styles.control}>
+        <MiddleAudioItem></MiddleAudioItem>
+      </div>
+      <div className={styles.right} >
+        <img className={styles.soundIcon} src={iconUrl} alt="" />
+        <div className={styles.slider}>
+          <Slider onChange={(value) => setVolume(value)} defaultValue={100} />
+        </div>
+      </div>
     </div>
   )
 }

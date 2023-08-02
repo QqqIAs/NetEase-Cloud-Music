@@ -1,4 +1,74 @@
 .root {
   display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.audio {
+  display: flex;
+  flex: 1;
   margin: 10px 15px;
+}
+
+.control {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+}
+
+.right {
+ flex:1;
+ display: flex;
+ justify-content: end;
+ align-items: center;
+ margin-right: 20px;
+}
+
+.soundIcon {
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+}
+
+
+.slider {
+  width: 130px;
+
+  :global {
+    .ant-slider {
+      height: 2px;
+    }
+
+    .ant-slider-track {
+      background-color: #fafafa;
+      height: 2px;
+    }
+
+    .ant-slider-step {
+      background-color: #b64037;
+      height: 2px;
+    }
+
+    .ant-tooltip-open {
+      background-color: #fafafa;
+    }
+
+    .ant-slider-handle {
+      width: 3px;
+      height: 3px;
+
+      &:hover, &:focus {
+        &::after {
+          box-shadow: 0 0 0 4px #b64037;
+        }
+      }
+      &::after {
+        box-shadow: 0 0 0 2px #b64037;
+      }
+    }
+  }
 }

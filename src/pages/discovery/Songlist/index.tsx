@@ -1,6 +1,7 @@
 import { useRef } from "react"
 
 import useAudioStore from "@/store/useAudioStore"
+import { Slider } from "antd"
 
 function SongList() {
   const ref = useRef<HTMLAudioElement>(null)
@@ -18,6 +19,7 @@ function SongList() {
   <div>{artists}</div>
   <div>{musicUrl}</div>
   <div>{JSON.stringify(play)}</div>
+  <Slider defaultValue={30} />
   </div>
 
 }
