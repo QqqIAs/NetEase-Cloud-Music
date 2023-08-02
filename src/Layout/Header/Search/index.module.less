@@ -1,4 +1,46 @@
-.search {
+.root {
+  display: flex;
   position: absolute;
   right: 30px;
+  align-items: center;
+
+  .search {
+    width: 150px;
+    margin-right: 40px;
+
+    :global {
+      .ant-input-group-addon {
+        display: none;
+      }
+
+      .ant-input-affix-wrapper {
+        border-radius: 16px !important;
+        background-color: #ececec;
+      }
+
+      .ant-input {
+        background-color: #ececec;
+      }
+    }
+  }
 }
+
+  :global {
+
+    .ant-drawer {
+      .ant-drawer-mask {
+        background: rgba(255,255,255,0) !important;
+      }
+    }
+
+    .ant-drawer-content-wrapper {
+      width: 400px !important;
+      position: relative;
+      top: 50px !important;
+      height: calc(100vh - @footerHeight - @headerHeight);
+    }
+
+    .ant-drawer-wrapper-body {
+      background-color: #ffffff;
+    }
+  }
