@@ -42,6 +42,12 @@ const NAVBAR = {
       route: ROUTES.MV,
     },
   ],
+  [ROUTES.SEARCH]: [
+    {
+      label: '',
+      route: ROUTES.SEARCH
+    }
+  ]
 }
 
 const leftRound = [

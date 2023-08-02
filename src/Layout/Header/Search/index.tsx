@@ -5,11 +5,14 @@ import { Drawer } from 'antd';
 import { useEffect, useState } from 'react';
 import DrawerContent from './DrawerContent';
 import * as searchApi from '@/services/search'
+import { useNavigate } from 'react-router-dom';
 
 
 const { Search } = Input;
 
 function TopSearch() {
+
+  const navigate = useNavigate()
 
   const [hotSongs, setHotSongs] = useState([])
 
@@ -47,6 +50,7 @@ function TopSearch() {
     }
 
     // 执行搜索
+    navigate(`/search?keywords=${value}`)
   }
 
   return (

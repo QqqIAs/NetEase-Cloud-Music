@@ -12,6 +12,7 @@ import Singers from "@/pages/discovery/Singers";
 import SongList from "@/pages/discovery/Songlist";
 import Video from "@/pages/videos/Video";
 import Mv from "@/pages/videos/Mv";
+import Search from "@/pages/search";
 
 
 const router = createBrowserRouter([
@@ -60,6 +61,16 @@ const router = createBrowserRouter([
       {
         path: '/videos/mv',
         element: <Mv></Mv>
+      },
+    ]
+  },
+  {
+    path: '/search',
+    element: <Layout></Layout>,
+    children: [
+      {
+        path: '/search',
+        element: <Search></Search>
       }
     ]
   }

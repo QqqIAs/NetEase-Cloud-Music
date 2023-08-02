@@ -6,8 +6,6 @@ function DrawerContent (props) {
 
   const {hotSongs} = props
 
-  console.log('xx', hotSongs)
-
   const [forceUpdate, setForceUpdate] = useState(false);
 
   const searchHistory = JSON.parse(localStorage.getItem('searchHistory')!)
