@@ -50,7 +50,8 @@ function TopSearch() {
     }
 
     // 执行搜索
-    navigate(`/search?keywords=${value}`)
+    // navigate(`/search?keywords=${value}`)
+    window.location.href=`/search?keywords=${value}`
   }
 
   return (
