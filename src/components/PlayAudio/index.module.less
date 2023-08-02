@@ -5,6 +5,20 @@
   justify-content: space-between;
 }
 
+.topper {
+  position: absolute;
+  top: -15px;
+  width: 100% !important;
+
+  :global {
+    .ant-slider-handle::after {
+      width: 2px;
+      height: 2px;
+      top: 3px;
+    }
+  }
+}
+
 .audio {
   display: flex;
   flex: 1;
@@ -41,6 +55,12 @@
   :global {
     .ant-slider {
       height: 2px;
+
+      .ant-slider-handle::after {
+        width: 2px;
+        height: 2px;
+        top: 3px;
+      }
 
       &:hover {
         .ant-slider-track {

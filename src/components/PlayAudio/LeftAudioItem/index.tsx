@@ -1,5 +1,6 @@
 import styles from './index.module.less'
 import formatTime from '@/utils/formatTime'
+import getDurationTime from '@/utils/getDurationTime'
 
 function AudioItem (props) {
   
@@ -13,7 +14,7 @@ function AudioItem (props) {
             <span className={styles.name}>{songName}&nbsp;</span>
             <span className={styles.artists}>{`- ${artists}`}</span>
           </div>
-          <div className={styles.duration} >{`${formatTime(currentTime)}/${duration}`}</div>
+          <div className={styles.duration} >{`${formatTime(currentTime)}/${getDurationTime(duration)}`}</div>
         </div>
     </>
   )

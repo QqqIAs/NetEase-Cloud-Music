@@ -5,11 +5,13 @@ import MiddleAudioItem from "./MiddleAudioItem"
 import styles from './index.module.less'
 import getAssetURL from "@/utils/getAssetURl"
 import { Slider } from 'antd';
+import cn from 'classnames'
 
 function PlayAudio () {
   const { picUrl, songName, artists, musicUrl, play, duration, show, setPlay } = useAudioStore((state) => state)
   const ref = useRef<HTMLAudioElement>(null)
   const [currentTime, setCurrentTime] = useState(0)
+  const [sliderValue, setSliderValue] = useState(0)
 
   const iconUrl = getAssetURL('sound.png')
 
@@ -19,6 +21,7 @@ function PlayAudio () {
     // 本地存储
     // 判断musicUrl是否勋在是为了防止zustand存储初始化值被存放到本地
     if(musicUrl && musicUrl !== localState?.musicUrl) {
+      setSliderValue(0)
       localStorage.setItem('musicInitialState', JSON.stringify({
         musicUrl,
         artists,
@@ -41,15 +44,26 @@ function PlayAudio () {
     ref.current!.volume = v/100
   }
 
+    // 时间戳
+  const time = duration !== '0' ? duration : JSON.parse(localStorage.getItem('musicInitialState')!).duration
+
   // 播放时间改变
   if(ref.current) {
     ref.current.ontimeupdate = () => {
+      // 左侧播放时间
       setCurrentTime(ref.current!.currentTime)
+      // 上方滚动条
+      setSliderValue(ref.current!.currentTime / (Number(time)/1000) * 100)
     }
   }
 
   return (
-    <div className={styles.root}>
+    <>
+      <div style={{ position: 'relative' }}>
+      <div className={cn(styles.slider, styles.topper)}>
+        <Slider value={sliderValue} tooltip={{ open: false}} onChange={(value) => { ref.current!.currentTime = ((time / 1000) * (value / 100)); setCurrentTime(((time / 1000) * (value / 100))) }} defaultValue={0} />
+      </div>
+      <div className={styles.root}>
       <audio ref={ref} style={{ display: 'none' }} controls src={musicUrl || localState.musicUrl}></audio>
       {show ? 
         <> <div className={styles.audio}>
@@ -67,6 +81,8 @@ function PlayAudio () {
         </div>
       </div>
     </div>
+      </div>
+    </>
   )
 }
 

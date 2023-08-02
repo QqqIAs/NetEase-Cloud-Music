@@ -1,8 +1,6 @@
 import { create } from 'zustand'
 import getArtistsName from '@/utils/getArtistsName'
-import getDurationTime from '@/utils/getDurationTime'
 import getMusicUrl from '@/utils/getMusicUrl'
-import formatTime from '@/utils/formatTime'
 
 type Store = {
   picUrl: string
@@ -37,7 +35,7 @@ const useAudioStore = create<Store>((set) => ({
     songName: props.name,
     artists: getArtistsName(props.artists),
     musicUrl: getMusicUrl(props.id),
-    duration: getDurationTime(props.duration)
+    duration: props.duration
   })),
 }))
 
