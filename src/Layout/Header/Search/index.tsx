@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import DrawerContent from './DrawerContent';
 import * as searchApi from '@/services/search'
 import { useNavigate } from 'react-router-dom';
+import useLayoutStore from '@/store/useLayoutStore';
 
 
 const { Search } = Input;
@@ -41,6 +42,8 @@ function TopSearch() {
     },
   ]
 
+  const { setShowLyric } = useLayoutStore((state) => state)
+
   const handleSearch = (value) => {
     // 存储本地
     const searchHistory = JSON.parse(localStorage.getItem('searchHistory')!) || []
@@ -48,6 +51,9 @@ function TopSearch() {
       searchHistory.unshift(value)
       localStorage.setItem('searchHistory', JSON.stringify(searchHistory))
     }
+
+    //若有遮罩层，关闭遮罩层
+    setShowLyric(false)
 
     // 执行搜索
     navigate(`/search?keywords=${value}`)

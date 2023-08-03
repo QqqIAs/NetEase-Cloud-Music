@@ -2,6 +2,7 @@ import { DeleteOutlined } from '@ant-design/icons'
 import styles from './index.module.less'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import useLayoutStore from '@/store/useLayoutStore'
 
 function DrawerContent (props) {
 
@@ -10,6 +11,8 @@ function DrawerContent (props) {
   const {hotSongs} = props
 
   const [forceUpdate, setForceUpdate] = useState(false);
+  const { setShowLyric } = useLayoutStore((state) => state)
+
 
   const searchHistory = JSON.parse(localStorage.getItem('searchHistory')!)
 
@@ -26,6 +29,10 @@ function DrawerContent (props) {
           searchHistory.unshift(value)
           localStorage.setItem('searchHistory', JSON.stringify(searchHistory))
         }
+
+        
+        //若有遮罩层，关闭遮罩层
+        setShowLyric(false)
     
         // 执行搜索
         navigate(`/search?keywords=${value}`)

@@ -4,13 +4,15 @@ import LeftSider from './Sider';
 import styles from './index.module.less';
 import { Outlet } from 'react-router-dom';
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 
 function MainLayout() {
   const location = useLocation()
   const navigate = useNavigate()
+  // 点击底部图片显示歌词，隐藏顶部tabs
+  const [showTopTabs, setShowTopTabs] = useState(true)
   useEffect(() => {
     // 默认路由跳转
     if(location.pathname === '/discovery')

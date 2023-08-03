@@ -44,8 +44,9 @@ function SingleSong(props) {
       title: '歌手',
       dataIndex: 'artists',
       key: 'artists',
+      ellipsis: true,
       render: (v) => {
-        return <span>{getArtistsName(v)}</span>
+        return <span className={styles.ellipsis}>{getArtistsName(v)}</span>
       },
       width: 170
     },

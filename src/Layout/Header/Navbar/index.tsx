@@ -1,9 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import ROUTES from '@/constants/routes'
 import styles from './index.module.less'
-import { LeftOutlined, RightOutlined, CloseOutlined, ArrowsAltOutlined, MinusOutlined} from '@ant-design/icons'
+import { LeftOutlined, RightOutlined, CloseOutlined, ArrowsAltOutlined, MinusOutlined, DownOutlined} from '@ant-design/icons'
 import { useState } from "react";
 import Search from "../Search";
+import useLayoutStore from "@/store/useLayoutStore";
 
 const NAVBAR = {
   [ROUTES.DISCOVERY]: [
@@ -68,6 +69,7 @@ const leftRound = [
 
 const Navbar = () => {
   const [activeIndex, setActiveIndex] = useState(0)
+  const { showLyric, setShowLyric } = useLayoutStore((state) => state)
 
   const navigate = useNavigate()
   const { pathname } = useLocation()
@@ -100,21 +102,25 @@ const Navbar = () => {
           }        
       </div>
       <div style={{ marginRight: '30px'}}>
-        {/* 左侧前进返回按钮 */}
-         <span><LeftOutlined style={{ marginRight: '10px', fontSize: '14px'}} onClick={() => {navigate(-1)}}/><RightOutlined style={{ fontSize: '14px'}} onClick={() => {navigate(1)}}/></span>
+        {/* 左侧前进返回按钮，遮罩层下拉按钮 */}
+        {
+          showLyric ? <DownOutlined onClick={() => setShowLyric(!showLyric)} /> : <span><LeftOutlined style={{ marginRight: '10px', fontSize: '14px'}} onClick={() => {navigate(-1)}}/><RightOutlined style={{ fontSize: '14px'}} onClick={() => {navigate(1)}}/></span>
+        }
       </div>
-      {items.map(({ label, route }, index) => {
-        return (
-          <li
-            style={activeIndex === index ? { color: '#000000'} : undefined}
-            onClick={() => handleItemClick(route, index)}
-            className={styles.item}
-            key={label}
-          >
-            {label}
-          </li>
-        )
-      })}
+      {
+         showLyric ? null : items.map(({ label, route }, index) => {
+          return (
+            <li
+              style={activeIndex === index ? { color: '#000000'} : undefined}
+              onClick={() => handleItemClick(route, index)}
+              className={styles.item}
+              key={label}
+            >
+              {label}
+            </li>
+          )
+        })
+      }
       <Search></Search>
     </div>
   )
