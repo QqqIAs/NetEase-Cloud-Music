@@ -1,8 +1,11 @@
 import { DeleteOutlined } from '@ant-design/icons'
 import styles from './index.module.less'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function DrawerContent (props) {
+
+  const navigate = useNavigate()
 
   const {hotSongs} = props
 
@@ -25,8 +28,7 @@ function DrawerContent (props) {
         }
     
         // 执行搜索
-        // navigate(`/search?keywords=${value}`)
-        window.location.href=`/search?keywords=${value}`
+        navigate(`/search?keywords=${value}`)
   }
 
   return (

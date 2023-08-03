@@ -114,12 +114,10 @@ function SingleSong(props) {
       setPerfectSong(Object.assign({},list[0], {picUrl: result?.album?.blurPicUrl}))
       return { list, total: songCount };
     },
-    { debounceWait: 300, defaultPageSize: 100 },
+    { debounceWait: 300, defaultPageSize: 100, refreshDeps: [params] },
   );
 
   const [dataSource, setDataSource] = useState(tableProps?.dataSource || [])
-
-  console.log('值', tableProps.dataSource)
 
   useUpdateEffect(() => {
     setDataSource(tableProps?.dataSource || [])
