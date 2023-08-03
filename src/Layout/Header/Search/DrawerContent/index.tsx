@@ -16,6 +16,19 @@ function DrawerContent (props) {
     setForceUpdate(!forceUpdate)
   }
 
+  const handleSearch = (value) => {
+        // 存储本地
+        const searchHistory = JSON.parse(localStorage.getItem('searchHistory')!) || []
+        if(!searchHistory.includes(value)) {
+          searchHistory.unshift(value)
+          localStorage.setItem('searchHistory', JSON.stringify(searchHistory))
+        }
+    
+        // 执行搜索
+        // navigate(`/search?keywords=${value}`)
+        window.location.href=`/search?keywords=${value}`
+  }
+
   return (
     <>
       { searchHistory?.length > 0 && <div className={styles.history}>
@@ -23,7 +36,7 @@ function DrawerContent (props) {
         <div className={styles.searchLists}>
           {
             searchHistory?.length > 0 && searchHistory.map((item, index) => {
-              return <span key={index} className={styles.searchSpan}>{item}</span>
+              return <span key={index} onClick={() =>  handleSearch(item)} className={styles.searchSpan}>{item}</span>
             })
           }
         </div>
@@ -33,7 +46,7 @@ function DrawerContent (props) {
           {
             hotSongs.length > 0 && hotSongs.map((item, index) => {
               return (
-                <div className={styles.root} key={index}>
+                <div className={styles.root} key={index} onClick={() => handleSearch(item.searchWord)}>
                   <div style={{ color: index > 2 ? '#bfbfbf' : '#eb4d44', position: 'relative', left: '-3px', fontSize: '16px' }}>{index+1}</div>
                   <div className={styles.hotCard}>
                     <div>

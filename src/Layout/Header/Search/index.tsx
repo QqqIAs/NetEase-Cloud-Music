@@ -45,7 +45,7 @@ function TopSearch() {
     // 存储本地
     const searchHistory = JSON.parse(localStorage.getItem('searchHistory')!) || []
     if(!searchHistory.includes(value)) {
-      searchHistory.push(value)
+      searchHistory.unshift(value)
       localStorage.setItem('searchHistory', JSON.stringify(searchHistory))
     }
 
