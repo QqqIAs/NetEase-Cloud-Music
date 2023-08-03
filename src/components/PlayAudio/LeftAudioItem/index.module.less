@@ -1,4 +1,23 @@
+.mask {
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 45px;
+  height: 45px;
+  border-radius: 8px;
+  background-color: rgba(0,0,0,0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 
+  &:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+}
 
 .img {
   width: 45px;
@@ -41,4 +60,22 @@
   color: #b3b3b3;
   margin-top: 5px;
   font-size: 12px;
+}
+
+.drawer {
+  :global {
+    .ant-drawer-mask {
+      background: rgba(255,255,255,0) !important;
+    }
+
+  .ant-drawer-content-wrapper {
+    bottom: @footerHeight;
+    height: calc(100vh - @headerHeight - @footerHeight) !important;
+  }
+
+
+  .ant-drawer-wrapper-body {
+    background-color: #f8f8f8;
+  }
+  }
 }
