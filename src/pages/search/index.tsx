@@ -1,107 +1,66 @@
-import { useEffect, useState } from "react"
-import { useSearchParams, useLocation } from "react-router-dom"
-import * as searchApi from '@/services/search'
-import { useAntdTable, useUpdateEffect } from 'ahooks';
-import { Table } from "antd";
-import getDurationTime from "@/utils/getDurationTime";
-import getArtistsName from "@/utils/getArtistsName";
-import useAudioStore from "@/store/useAudioStore";
+import { useSearchParams } from "react-router-dom"
+import { Tabs } from "antd";
+import SingleSong from "./SingleSong";
+import styles from './index.module.less'
+import { useState } from "react";
 
 function Search () {
 
-
-  const location = useLocation()
-  let [searchParams, setSearchParams] = useSearchParams()
-  const { setInitialState, } = useAudioStore((state) => state)
+  const [searchParams, setSearchParams] = useSearchParams()
   const params = searchParams.get('keywords')
-  const [forceUpdate, setForceUpdate] = useState(false)
+  const [count, setCount] = useState(0)
 
-  useEffect(() => {
-    setForceUpdate(!forceUpdate)
-  }, [location.search])
-
-  console.log(location.search)
-
-  const columns = [
+  const items = [
     {
-      title: '音乐标题',
-      dataIndex: 'songName',
-      key: 'songName',
+      key: '1',
+      label: `单曲`,
+      children: <SingleSong params={params} showCount={(v) => setCount(v)}  ></SingleSong>,
     },
     {
-      title: '歌手',
-      dataIndex: 'artists',
-      key: 'artists',
-      render: (v) => {
-        return <span>{getArtistsName(v)}</span>
-      }
+      key: '2',
+      label: `歌手`,
+      children: `Content of Tab Pane 2`,
     },
     {
-      title: '专辑',
-      dataIndex: 'albumName',
-      key: 'albumName',
+      key: '3',
+      label: `专辑`,
+      children: `Content of Tab Pane 3`,
     },
     {
-      title: '时长',
-      dataIndex: 'duration',
-      key: "duration",
-      render: (v) => {
-        return <span>{getDurationTime(v)}</span>
-      }
-    }
+      key: '4',
+      label: `视频`,
+      children: `Content of Tab Pane 4`,
+    },
+    {
+      key: '5',
+      label: `歌单`,
+      children: `Content of Tab Pane 5`,
+    },
+    {
+      key: '6',
+      label: `歌词`,
+      children: `Content of Tab Pane 6`,
+    },
+    {
+      key: '7',
+      label: `播客`,
+      children: `Content of Tab Pane 7`,
+    },
+    {
+      key: '8',
+      label: `用户`,
+      children: `Content of Tab Pane 8`,
+    },
   ];
 
-  const handlePlay = async(record) => {
-    const result = await searchApi.getAlbum(record.albumId)
-    const picUrl = result?.album.blurPicUrl;
-    setInitialState({
-      picUrl,
-      name: record.songName,
-      artists: record.artists,
-      id: record.id,
-      duration: record.duration
-    })
-  }
-
-  const { tableProps, pagination } = useAntdTable(
-    async ({ current }) => {
-      const { result: {songs, songCount}}  = await searchApi.getSearchKeyword({
-        offset: (current - 1) * 100,
-        keywords: params
-      });
-      const list = []
-      songs.map((item) => {
-        list.push({
-          songName: item.name,
-          albumId: item.album.id,
-          id: item.id,
-          artists: item.artists,
-          albumName: item.album.name,
-          duration: item.duration,
-        })
-      })
-      return { list, total: songCount };
-    },
-    { debounceWait: 300, defaultPageSize: 100 },
-  );
-
-  const [dataSource, setDataSource] = useState(tableProps?.dataSource || [])
-
-  useUpdateEffect(() => {
-    setDataSource(tableProps?.dataSource || [])
-  }, [tableProps?.dataSource]);
 
   return <>
-    <div>
-    <Table 
-      columns={columns} 
-      {...tableProps} 
-      onRow={(record, index) => {
-        return {
-          onClick: () => {handlePlay(record)}
-        }
-      }}
-      />
+    <div className={styles.root}>
+      <div style={{ display: 'flex', marginBottom: '8px' }}>
+        <span style={{ fontSize: '22px', marginRight: '6px', fontWeight: 'bold'}}>{params}</span>
+        <span  className={styles.find}>{`找到 ${count} 首单曲`}</span>
+      </div>
+      <Tabs defaultActiveKey="1" items={items} />
     </div>
     </>
 }

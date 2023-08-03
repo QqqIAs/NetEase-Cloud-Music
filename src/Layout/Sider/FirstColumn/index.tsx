@@ -1,14 +1,21 @@
 import { VideoCameraOutlined, TeamOutlined, AntCloudOutlined, SoundOutlined, AppleOutlined, ArrowDownOutlined, HeartOutlined, StarOutlined  } from '@ant-design/icons'
 import styles from './index.module.less'
 import getAssetURL from '@/utils/getAssetURl'
-import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
 function FirstColumn () {
   const [activeIndex, setActiveIndex] = useState(0)
 
   const discoveryUrl = getAssetURL('icon.svg')
   const navigate = useNavigate()
+  const location = useLocation()
+
+  useEffect(() => {
+    // tab标签改变
+    if(location.pathname.startsWith('/search'))
+    setActiveIndex(-1)
+  }, [location.pathname])
 
   const activeStyle = {
     backgroundColor: '#e1e1e1',
