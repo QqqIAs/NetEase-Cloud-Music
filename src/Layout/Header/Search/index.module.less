@@ -25,22 +25,26 @@
   }
 }
 
+  
+.testDrawer {
   :global {
-
-    .ant-drawer {
       .ant-drawer-mask {
         background: rgba(255,255,255,0) !important;
       }
-    }
 
     .ant-drawer-content-wrapper {
       width: 400px !important;
-      position: relative;
-      top: 50px !important;
+      top: 50px;
       height: calc(100vh - @footerHeight - @headerHeight);
     }
+
 
     .ant-drawer-wrapper-body {
       background-color: #ffffff;
     }
   }
+}
+
+.test13 {
+  color: red;
+}

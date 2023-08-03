@@ -56,6 +56,7 @@ function TopSearch() {
   return (
     <>
       <div className={styles.root}>
+      <Drawer rootClassName={styles.testDrawer} autoFocus={false}	 closeIcon={false} placement="right" onClose={onClose} open={open}><DrawerContent hotSongs={hotSongs}></DrawerContent></Drawer>
         <div className={styles.search} >
           <Search 
             onClick={showDrawer}
@@ -64,14 +65,12 @@ function TopSearch() {
             allowClear 
             prefix={<SearchOutlined />}></Search>
         </div>
-        <div className={styles.drawer}>
-          <Drawer autoFocus={false}	 closeIcon={false} placement="right" onClose={onClose} open={open}><DrawerContent hotSongs={hotSongs}></DrawerContent></Drawer>
-        </div>
       {
         select.map((item) => {
           return <span key={item.route} onClick={() => {window.open(item.route)}} style={{marginRight: '20px', cursor: 'pointer'}}>{item.icon}</span>
         })
       }
+      
       </div>
     </>
   )
