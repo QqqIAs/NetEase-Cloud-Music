@@ -1,8 +1,11 @@
 import { HeartOutlined } from '@ant-design/icons'
 import styles from './index.module.less'
+import dayjs from 'dayjs'
 
 function UserComment (props) {
   const { avatarUrl, nickName, content, time, likedCount } = props
+
+  const latetime = dayjs(time).format('M月D日 HH:mm')
 
   return (
     <>
@@ -16,7 +19,7 @@ function UserComment (props) {
               <span className={styles.content}>{content}</span>
             </div>
             <div className={styles.bottom} >
-              <span className={styles.time}>{time}</span>
+              <span className={styles.time}>{latetime}</span>
               <span className={styles.count}><HeartOutlined style={{ marginRight: '5px' }} />{likedCount}</span>
             </div>
         </div>
