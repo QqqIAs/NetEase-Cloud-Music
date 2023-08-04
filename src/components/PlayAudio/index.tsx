@@ -8,7 +8,7 @@ import { Slider } from 'antd';
 import cn from 'classnames'
 
 function PlayAudio () {
-  const { picUrl, songName, artists, musicUrl, play, duration, show, setPlay } = useAudioStore((state) => state)
+  const { picUrl, songName, artists, musicUrl, play, duration, show, setPlay, id } = useAudioStore((state) => state)
   const ref = useRef<HTMLAudioElement>(null)
   const [currentTime, setCurrentTime] = useState(0)
   const [sliderValue, setSliderValue] = useState(0)
@@ -23,6 +23,7 @@ function PlayAudio () {
     if(musicUrl && musicUrl !== localState?.musicUrl) {
       setSliderValue(0)
       localStorage.setItem('musicInitialState', JSON.stringify({
+        id,
         musicUrl,
         artists,
         picUrl,

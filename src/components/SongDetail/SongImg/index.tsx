@@ -14,8 +14,6 @@ function SongImg (props) {
     transformOrigin: '0 0',
   }
 
-  console.log(picUrl)
-
   const cdUrl = getAssetURL('play-cd.png')
   const barUrl = getAssetURL('play-bar.png')
 

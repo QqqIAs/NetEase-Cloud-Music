@@ -3,6 +3,7 @@ import getArtistsName from '@/utils/getArtistsName'
 import getMusicUrl from '@/utils/getMusicUrl'
 
 type Store = {
+  id: number
   picUrl: string
   songName: string
   artists: string
@@ -16,6 +17,7 @@ type Store = {
 }
 
 const useAudioStore = create<Store>((set) => ({
+  id: 0,
   picUrl: '',
   songName: '',
   artists: '',
@@ -29,6 +31,7 @@ const useAudioStore = create<Store>((set) => ({
   setPlay: (play: boolean) => set(() => ({ play })),
   setShow: (show: boolean) => set(() => ({ show })),
   setInitialState: (props: any ) => set(() => ({
+    id: props.id,
     play: true,
     show: true,
     picUrl: props.picUrl,

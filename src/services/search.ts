@@ -23,3 +23,13 @@ export const getAlbum = (id) => {
     }
   })
 }
+
+export const getCommentMusic = ({ id, offset = 0, limit = 30}) => {
+  return request.get('/comment/music', {
+    params: {
+      id,
+      limit,
+      offset
+    }
+  })
+}

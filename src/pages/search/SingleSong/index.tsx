@@ -4,7 +4,7 @@ import getDurationTime from "@/utils/getDurationTime";
 import { Table } from "antd";
 import * as searchApi from '@/services/search'
 import { useAntdTable, useUpdateEffect } from 'ahooks';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from './index.module.less'
 import { RightOutlined } from "@ant-design/icons";
 
@@ -13,6 +13,7 @@ import { RightOutlined } from "@ant-design/icons";
 function SingleSong(props) {
 
   const { params, showCount } = props
+  const ref = useRef(null)
 
   const { setInitialState, } = useAudioStore((state) => state)
   const [perfectSong, setPerfectSong] = useState({})
@@ -118,6 +119,11 @@ function SingleSong(props) {
     { debounceWait: 300, defaultPageSize: 100, refreshDeps: [params] },
   );
 
+  useEffect(() => {
+    // 翻页后最新评论置中
+    ref.current && ref.current.scrollIntoView()
+  }, [pagination.current])
+
   const [dataSource, setDataSource] = useState(tableProps?.dataSource || [])
 
   useUpdateEffect(() => {
@@ -125,7 +131,7 @@ function SingleSong(props) {
   }, [tableProps?.dataSource]);
 
   return <>
-    <div className={styles.root}>
+    <div ref={ref} className={styles.root}>
     {
       Object.keys(perfectSong).length > 0 ? <><div>最佳匹配</div>
       <div className={styles.perfect}>
