@@ -32,18 +32,6 @@
     background-color: #1c1d20;
     border-radius: 50%;
     border: 10px solid #e4e0e0;
-    // animation: rotate 10s infinite linear; /* 应用旋转动画 */
-
-
-
-    .img {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-    }
-  }
-
-  .imgrotate {
     animation: rotate 10s infinite linear; /* 应用旋转动画 */
 
     @keyframes rotate {
@@ -54,6 +42,17 @@
         transform: rotate(360deg); /* 结束状态 */
       }
     }
+
+    .img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+    }
   }
+
+  .pause {
+    animation-play-state: paused;
+  }
+
   
 }

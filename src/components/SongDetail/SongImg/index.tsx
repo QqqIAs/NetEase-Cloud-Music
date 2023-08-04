@@ -25,7 +25,7 @@ function SongImg (props) {
       <div className={styles.root}>
         <img className={styles.cd} src={cdUrl} alt="" />
         <img style={ play ? undefined : transformStyle } className={styles.bar} src={barUrl} />
-        <div className={cn(styles.circle, play ? styles.imgrotate : null)}>
+        <div className={cn(styles.circle, play ? null : styles.pause)}>
           <img className={styles.img} src={latestPicUrl} alt="" />
         </div>
       </div>
