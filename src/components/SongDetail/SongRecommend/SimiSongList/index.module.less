@@ -1,0 +1,42 @@
+.root {
+
+  margin-bottom: 40px;
+
+  .card {
+    display: flex;
+    align-items: center;
+
+    margin: 10px 0;
+
+    .img {
+      width: 47px;
+      height: 47px;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+
+
+    .name {
+      overflow: hidden;
+      word-wrap: normal;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .count {
+      color: #7d7d7d;
+      font-size: 13px;
+      margin-left: 5px;
+    }
+
+    .triangle {
+      margin-left: 2px;
+      width: 0;
+      height: 0;
+      border-bottom: 5px solid transparent; /* 左边透明 */
+      border-top: 5px solid transparent; /* 右边透明 */
+      border-left: 5px solid #7d7d7d; /* 底边实色 */
+    }
+
+  }
+}

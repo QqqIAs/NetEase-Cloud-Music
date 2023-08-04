@@ -4,6 +4,7 @@ import getArtistsName from '@/utils/getArtistsName';
 import useAudioStore from "@/store/useAudioStore"
 import getMusicUrl from '@/utils/getMusicUrl';
 import getAssetURL from '@/utils/getAssetURl';
+import { CaretRightOutlined } from '@ant-design/icons';
 
 
 function MusicItem(props: any) {
@@ -23,8 +24,9 @@ function MusicItem(props: any) {
   const IconUrl = play ? getAssetURL('play.png') : getAssetURL('pause.png');
 
   return (
-    <div className={cn(styles.root, hasBorderBottom && styles.borderBottom)}>
-      <img className={cn(styles.img)} src={picUrl} alt="" onClick={() => handlerPLay()} />
+    <div className={cn(styles.root, hasBorderBottom && styles.borderBottom)} onClick={() => handlerPLay()} >
+      <div className={styles.play}><CaretRightOutlined style={{ color: '#c3473a', fontSize: '16px' }} /></div>
+      <img className={cn(styles.img)} src={picUrl} alt=""  />
       { isMemoryUrl === Url ? <img className={styles.icon} src={IconUrl} alt="" /> :  <span className={cn(styles.number)}>{index !== 9 ? `0${index + 1}` : index + 1}</span>
  }
       <div style={{ overflow: 'hidden' }}>

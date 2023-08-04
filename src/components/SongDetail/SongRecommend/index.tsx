@@ -1,12 +1,19 @@
-import { useEffect } from 'react'
 import styles from './index.module.less'
+import MusicItem from './MusicItem'
+import SimiSongList from './SimiSongList'
+
 
 function SongRecommend () {
 
 
+
+
   return (
     <>
-      <div>Recommend</div>
+      <div className={styles.root}>
+          <SimiSongList></SimiSongList>
+          <MusicItem></MusicItem>
+      </div>
     </>
 
   )

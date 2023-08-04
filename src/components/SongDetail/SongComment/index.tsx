@@ -39,8 +39,6 @@ function SongComment () {
     setDataSource(tableProps?.dataSource || [])
   }, [tableProps?.dataSource]);
 
-  console.log(tableProps)
-
 
   return (
     <>
