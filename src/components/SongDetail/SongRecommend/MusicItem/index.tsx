@@ -4,7 +4,6 @@ import { getSimiSong } from '@/services/search';
 import useAudioStore from '@/store/useAudioStore';
 import cn from 'classnames'
 import getArtistsName from '@/utils/getArtistsName';
-import getMusicUrl from '@/utils/getMusicUrl';
 import { CaretRightOutlined } from '@ant-design/icons';
 
 

@@ -3,6 +3,8 @@ import getArtistsName from '@/utils/getArtistsName'
 import getMusicUrl from '@/utils/getMusicUrl'
 
 type Store = {
+  lyricJump: boolean
+  playCurrentTime: number
   id: number
   picUrl: string
   songName: string
@@ -14,9 +16,13 @@ type Store = {
   setPlay: (v: boolean) => void
   setShow: (v: boolean) => void
   setInitialState: (props: any) => void
+  setPlayCurrentTime: (v: number) => void
+  setLyricJump: (v: boolean) => void
 }
 
 const useAudioStore = create<Store>((set) => ({
+  lyricJump: false,
+  playCurrentTime: 0,
   id: 0,
   picUrl: '',
   songName: '',
@@ -31,6 +37,7 @@ const useAudioStore = create<Store>((set) => ({
   setPlay: (play: boolean) => set(() => ({ play })),
   setShow: (show: boolean) => set(() => ({ show })),
   setInitialState: (props: any ) => set(() => ({
+    playCurrentTime: 0,
     id: props.id,
     play: true,
     show: true,
@@ -40,6 +47,8 @@ const useAudioStore = create<Store>((set) => ({
     musicUrl: getMusicUrl(props.id),
     duration: props.duration
   })),
+  setPlayCurrentTime: (v: number) => set(() => ({ playCurrentTime: v })),
+  setLyricJump: (v: boolean) => set(() => ({ lyricJump: v }))
 }))
 
 export default useAudioStore;

@@ -53,3 +53,12 @@ export const getSimiSong = ({ id }) => {
     }
   })
 }
+
+// 歌词
+export const getLyric = ({ id }) => {
+  return request.get('/lyric', {
+    params: {
+      id,
+    }
+  })
+}

@@ -8,7 +8,7 @@ import { Slider } from 'antd';
 import cn from 'classnames'
 
 function PlayAudio () {
-  const { picUrl, songName, artists, musicUrl, play, duration, show, setPlay, id } = useAudioStore((state) => state)
+  const { picUrl, songName, artists, musicUrl, play, duration, show, setPlay, id, setPlayCurrentTime, lyricJump, playCurrentTime } = useAudioStore((state) => state)
   const ref = useRef<HTMLAudioElement>(null)
   const [currentTime, setCurrentTime] = useState(0)
   const [sliderValue, setSliderValue] = useState(0)
@@ -51,12 +51,19 @@ function PlayAudio () {
   // 播放时间改变
   if(ref.current) {
     ref.current.ontimeupdate = () => {
+      // 全局存储播放时间
+      setPlayCurrentTime(ref.current!.currentTime)
       // 左侧播放时间
       setCurrentTime(ref.current!.currentTime)
       // 上方滚动条
       setSliderValue(ref.current!.currentTime / (Number(time)/1000) * 100)
     }
   }
+
+  useEffect(() => {
+    // 歌词跳转
+    ref.current!.currentTime = playCurrentTime
+  }, [lyricJump])
 
   return (
     <>
