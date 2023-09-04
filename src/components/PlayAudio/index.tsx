@@ -46,8 +46,7 @@ function PlayAudio () {
   }
 
     // 时间戳
-  const time = duration !== '0' ? duration : JSON.parse(localStorage.getItem('musicInitialState')!).duration
-
+    const time = duration !== '0' ? duration : JSON.parse(localStorage.getItem('musicInitialState')!).duration
   // 播放时间改变
   if(ref.current) {
     ref.current.ontimeupdate = () => {
@@ -72,7 +71,7 @@ function PlayAudio () {
         <Slider value={sliderValue} tooltip={{ open: false}} onChange={(value) => { ref.current!.currentTime = ((time / 1000) * (value / 100)); setCurrentTime(((time / 1000) * (value / 100))) }} defaultValue={0} />
       </div>
       <div className={styles.root}>
-      <audio ref={ref} style={{ display: 'none' }} controls src={musicUrl || localState.musicUrl}></audio>
+      <audio ref={ref} style={{ display: 'none' }} controls src={musicUrl || localState?.musicUrl}></audio>
       {show ? 
         <> <div className={styles.audio}>
             <AudioItem picUrl={picUrl} songName={songName} artists={artists} duration={duration} currentTime={currentTime}></AudioItem>

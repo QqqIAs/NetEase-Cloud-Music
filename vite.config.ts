@@ -19,7 +19,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',
+        target: 'https://service-cqngp86i-1319947040.gz.apigw.tencentcs.com/release/',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       }

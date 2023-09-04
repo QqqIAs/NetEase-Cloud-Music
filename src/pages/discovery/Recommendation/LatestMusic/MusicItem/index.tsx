@@ -11,7 +11,7 @@ function MusicItem(props: any) {
   const { name, picUrl, artists, index, id, duration } = props
   const { setInitialState, play, musicUrl } = useAudioStore((state) => state)
 
-  const isMemoryUrl = musicUrl || JSON.parse(localStorage.getItem('musicInitialState')!).musicUrl
+  const isMemoryUrl = musicUrl || JSON.parse(localStorage.getItem('musicInitialState')!)?.musicUrl
 
   const hasBorderBottom = [4, 9].indexOf(index) > -1
 
