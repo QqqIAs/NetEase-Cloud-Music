@@ -46,7 +46,7 @@ function PlayAudio () {
   }
 
     // 时间戳
-    const time = duration !== '0' ? duration : JSON.parse(localStorage.getItem('musicInitialState')!).duration
+    const time = duration !== '0' ? duration : JSON.parse(localStorage.getItem('musicInitialState')!)?.duration
   // 播放时间改变
   if(ref.current) {
     ref.current.ontimeupdate = () => {
